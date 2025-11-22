@@ -12,7 +12,7 @@ export default function Header() {
     <AppBar position="sticky" color="transparent" elevation={0} sx={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
       <Toolbar sx={{ display: 'flex', gap: 2 }}>
         <Typography variant="h4" sx={{ fontWeight: 700 }}>
-          Money Manager
+          MoneyManager
         </Typography>
 
         {/* Push nav to the right */}
