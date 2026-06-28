@@ -3,9 +3,11 @@ import cors from 'cors'
 import helmet from 'helmet'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
-import aiRouter from './routes/ai.js'
+import authRouter from './routes/auth.js'
+import accountsRouter from './routes/accounts.js'
 import transactionsRouter from './routes/transactions.js'
 import importRouter from './routes/import.js'
+import aiRouter from './routes/ai.js'
 
 dotenv.config()
 
@@ -44,9 +46,11 @@ if (isProd) {
 app.use(express.json({ limit: '5mb' }))
 
 // Routes
-app.use('/api/ai', aiRouter)
+app.use('/api/auth', authRouter)
+app.use('/api/accounts', accountsRouter)
 app.use('/api/transactions', transactionsRouter)
 app.use('/api/import', importRouter)
+app.use('/api/ai', aiRouter)
 
 // Health
 app.get('/health', (req, res) => res.json({ ok: true }))
