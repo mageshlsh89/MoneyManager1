@@ -1,4 +1,4 @@
-// src/pages/Dashboard.jsx
+// src/pages/Dashboard.jsx - NESTGrow Premium Dashboard
 import React, { useMemo, useState, useCallback, useRef, useLayoutEffect } from 'react'
 import { useTheme } from '@mui/material/styles'
 import {
@@ -40,7 +40,7 @@ import {
   CartesianGrid
 } from 'recharts'
 
-/* layout constants you can change in one place */
+/* layout constants */
 const CONTENT_MAX_WIDTH = 1200
 const TILE_WIDTH = 200
 const TILE_HEIGHT = 104
@@ -197,26 +197,77 @@ export default function Dashboard() {
   return (
     <Box sx={{ height: '90vh', display: 'flex', flexDirection: 'column' }}>
       {/* top area measured dynamically to avoid overlap */}
-      <Box ref={topRef} sx={{ px: { xs: 2, md: 3 }, py: 1.5, boxSizing: 'border-box', background: 'transparent' }}>
-        <Box sx={{ display: 'flex', gap: 2, alignItems: 'center', justifyContent: 'space-between', mb: 1 }}>
+      <Box ref={topRef} sx={{ px: { xs: 2, md: 3 }, py: 2, boxSizing: 'border-box', background: 'transparent' }}>
+        <Box sx={{ display: 'flex', gap: 2, alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
           <Box sx={{ minWidth: 0, flex: '1 1 auto', overflow: 'hidden' }}>
-            <Typography noWrap sx={{ color: tokens.textPrimary, fontWeight: 700, fontSize: 20, lineHeight: 1.1, overflow: 'hidden', textOverflow: 'ellipsis' }}>
-              Dashboard
+            <Typography 
+              noWrap 
+              sx={{ 
+                color: tokens.textPrimary, 
+                fontWeight: 800, 
+                fontSize: 28, 
+                lineHeight: 1.1, 
+                overflow: 'hidden', 
+                textOverflow: 'ellipsis',
+                background: `linear-gradient(90deg, ${tokens.primaryStart}, ${tokens.primaryEnd})`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
+              }}
+            >
+              Financial Overview
             </Typography>
-            <Typography noWrap sx={{ color: tokens.textSecondary, fontSize: 13, lineHeight: 1.1, overflow: 'hidden', textOverflow: 'ellipsis' }}>
-              Overview of your finances
+            <Typography 
+              noWrap 
+              sx={{ 
+                color: tokens.textSecondary, 
+                fontSize: 14, 
+                lineHeight: 1.1, 
+                overflow: 'hidden', 
+                textOverflow: 'ellipsis',
+                mt: 0.5
+              }}
+            >
+              Real-time insights into your financial health
             </Typography>
           </Box>
 
           <Box sx={{ flexShrink: 0, display: 'flex', gap: 1 }}>
-            <Button component={RouterLink} to="/transactions" variant="contained" sx={{ background: `linear-gradient(90deg, ${tokens.primaryStart}, ${tokens.primaryEnd})`, color: '#fff', textTransform: 'none', height: 36 }}>
-              Go to Transactions
+            <Button 
+              component={RouterLink} 
+              to="/transactions" 
+              variant="contained" 
+              sx={{ 
+                background: `linear-gradient(90deg, ${tokens.primaryStart}, ${tokens.primaryEnd})`, 
+                color: '#fff', 
+                textTransform: 'none', 
+                height: 40,
+                px: 2.5,
+                borderRadius: 3,
+                fontWeight: 600,
+                boxShadow: '0 4px 15px rgba(79, 70, 229, 0.3)',
+                '&:hover': { 
+                  boxShadow: '0 6px 20px rgba(79, 70, 229, 0.4)',
+                  transform: 'translateY(-1px)'
+                }
+              }}
+            >
+              View Transactions
             </Button>
           </Box>
         </Box>
 
-        <Paper sx={{ p: 1, mb: 1, borderRadius: 2 }}>
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.25, alignItems: 'center' }}>
+        <Paper 
+          sx={{ 
+            p: 2, 
+            mb: 2, 
+            borderRadius: 3,
+            background: 'rgba(15, 23, 42, 0.6)',
+            backdropFilter: 'blur(12px)',
+            border: '1px solid rgba(255, 255, 255, 0.08)'
+          }}
+        >
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5, alignItems: 'center' }}>
             <FormControl size="small" sx={{ minWidth: 110 }}>
               <InputLabel>Year</InputLabel>
               <Select value={year} label="Year" onChange={(e) => setYear(e.target.value)}>
@@ -243,7 +294,10 @@ export default function Dashboard() {
               </Select>
             </FormControl>
 
-            <FormControlLabel control={<Switch checked={conversionEnabled} onChange={() => setConversionEnabled(v => !v)} />} label="Enable conversion" />
+            <FormControlLabel 
+              control={<Switch checked={conversionEnabled} onChange={() => setConversionEnabled(v => !v)} sx={{ '& .MuiSwitch-switchBase.Mui-checked': { color: tokens.primaryStart } }} />} 
+              label={<Typography sx={{ color: tokens.textSecondary, fontSize: 13 }}>Enable conversion</Typography>} 
+            />
 
             <FormControl size="small" sx={{ minWidth: 100 }}>
               <InputLabel>Base</InputLabel>
@@ -280,8 +334,22 @@ export default function Dashboard() {
       <Box sx={{ height: topHeight ? `calc(100vh - ${topHeight}px)` : 'calc(100vh - 320px)', px: { xs: 2, md: 3 }, pb: 1, boxSizing: 'border-box', overflow: 'hidden' }}>
         <Box sx={{ maxWidth: CONTENT_MAX_WIDTH, mx: 'auto', height: '100%' }}>
           <Box sx={{ display: 'flex', gap: `${CHARTS_H_GAP_PX}px`, height: '100%' }}>
-            <Paper sx={{ flex: 1, p: 1.5, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
-              <Typography sx={{ mb: 0.5, color: tokens.textPrimary, fontWeight: 700 }}>Category breakdown</Typography>
+            <Paper 
+              sx={{ 
+                flex: 1, 
+                p: 2, 
+                display: 'flex', 
+                flexDirection: 'column', 
+                minHeight: 0,
+                borderRadius: 3,
+                background: 'rgba(15, 23, 42, 0.6)',
+                backdropFilter: 'blur(12px)',
+                border: '1px solid rgba(255, 255, 255, 0.08)'
+              }}
+            >
+              <Typography sx={{ mb: 1, color: tokens.textPrimary, fontWeight: 700, fontSize: 16 }}>
+                Category Breakdown
+              </Typography>
               <Box sx={{ flex: 1, minHeight: 0 }}>
                 <ResponsiveContainer width="100%" aspect={2}>
                   <PieChart>
@@ -295,8 +363,22 @@ export default function Dashboard() {
               </Box>
             </Paper>
 
-            <Paper sx={{ flex: 1, p: 1.5, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
-              <Typography sx={{ mb: 0.5, color: tokens.textPrimary, fontWeight: 700 }}>Income vs expense trend</Typography>
+            <Paper 
+              sx={{ 
+                flex: 1, 
+                p: 2, 
+                display: 'flex', 
+                flexDirection: 'column', 
+                minHeight: 0,
+                borderRadius: 3,
+                background: 'rgba(15, 23, 42, 0.6)',
+                backdropFilter: 'blur(12px)',
+                border: '1px solid rgba(255, 255, 255, 0.08)'
+              }}
+            >
+              <Typography sx={{ mb: 1, color: tokens.textPrimary, fontWeight: 700, fontSize: 16 }}>
+                Income vs Expense Trend
+              </Typography>
               <Box sx={{ flex: 1, minHeight: 0 }}>
                 <ResponsiveContainer width="100%" aspect={2}>
                   <LineChart data={lineData}>
